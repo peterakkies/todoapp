@@ -1,24 +1,20 @@
 import React from "react";
 import { connect } from "react-redux";
-
-let nextTodoId = 0;
+import addTodo from "../store/actions/addTodo";
 
 const AddTodo = ({ dispatch }) => {
+  let input;
   return (
-    <div id="addTodo">
+    <div className="addTodo">
       <input
         ref={node => {
-          this.input = node;
+          input = node;
         }}
       />
       <button
         onClick={() => {
-          dispatch({
-            type: "ADD_TODO",
-            id: nextTodoId++,
-            text: this.input.value
-          });
-          this.input.value = "";
+          dispatch(addTodo(input.value));
+          input.value = "";
         }}
       >
         Add todo

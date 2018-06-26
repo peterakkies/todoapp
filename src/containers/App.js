@@ -2,18 +2,17 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./App.css";
 
-import AddTodo from "./containers/AddTodo.js";
+import AddTodo from "../components/AddTodo";
+import VisibleTodoList from "../containers/VisibleTodoList";
+import Footer from "../components/Footer";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <AddTodo />
-        <ul>
-          {this.props.todos.map(todo => {
-            return <li key={todo.id}>{todo.text}</li>;
-          })}
-        </ul>
+        <VisibleTodoList />
+        <Footer />
       </div>
     );
   }
@@ -26,7 +25,13 @@ const mapStateToProps = state => {
   };
 };
 
+const mapDispatchToProps = dispatch => {
+  return {
+    onTodoClick: id => dispatch("TOGGLE_TODO", id)
+  };
+};
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(App);
