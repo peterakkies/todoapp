@@ -1,37 +1,29 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import "./App.css";
 
 import AddTodo from "../components/AddTodo";
-import VisibleTodoList from "../containers/VisibleTodoList";
+import VisibleTodoList from "./VisibleTodoList";
 import Footer from "../components/Footer";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <AddTodo />
-        <VisibleTodoList />
-        <Footer />
-      </div>
-    );
-  }
-}
+const App = () => (
+	<div className="App">
+		<AddTodo />
+		<VisibleTodoList />
+		<Footer />
+	</div>
+);
 
-const mapStateToProps = state => {
-  return {
-    todos: state.todos,
-    visibilityFilter: state.visibilityFilter
-  };
-};
+const mapStateToProps = (state) => ({
+	todos: state.todos,
+	visibilityFilter: state.visibilityFilter
+});
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onTodoClick: id => dispatch("TOGGLE_TODO", id)
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+	onTodoClick: (id) => dispatch("TOGGLE_TODO", id)
+});
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+	mapStateToProps,
+	mapDispatchToProps
 )(App);
